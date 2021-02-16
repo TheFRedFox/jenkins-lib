@@ -43,6 +43,7 @@ class HttpService {
 			.build()
 
 		HttpResponse response = client.execute(request)
+		log.log(response.statusLine.toString())
 
 		throwExceptionWhenRestFailed(response.getStatusLine(), url, "GET")
 
