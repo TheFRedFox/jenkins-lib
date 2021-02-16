@@ -129,7 +129,7 @@ class Container {
 		return instance
 	}
 
-	static Container newInstance(CpsScript script, Map<String, Object> config) {
+	static Container newInstance(CpsScript script, Map<String, Object> config = [:]) {
 		def container = new Container()
 		container.init(script, config)
 		instance = container
