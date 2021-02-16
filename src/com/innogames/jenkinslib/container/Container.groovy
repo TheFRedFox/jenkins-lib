@@ -45,7 +45,7 @@ class Container {
 
 	def <T> T getComponent(Class<T> clazz) {
 		if (clazz.isAssignableFrom(CpsScript.class)) {
-			return this.getScript()
+			return this.getScript() as T
 		}
 
 		if (clazz.isAssignableFrom(Config.class)) {
