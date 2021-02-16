@@ -30,7 +30,7 @@ class DebDropService {
 			log.log("${curlCommand}")
 			log.log("${fileName} uploaded to ${repository}")
 		} else {
-			if (shell.sh(curlCommand)) {
+			if (shell.sh(curlCommand) == 0) {
 				log.log("${fileName} uploaded to ${repository}")
 			} else {
 				log.error('Something went wrong!')
