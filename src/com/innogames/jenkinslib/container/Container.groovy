@@ -20,18 +20,6 @@ class Container {
 
 	static Jenkins jenkinsInstance = Jenkins.get()
 
-	def identifier = [
-		'debug'  : Logger.class,
-		'debDrop': DebDropService.class,
-		'script' : CpsScript.class
-	]
-
-	def classes = [
-		Logger.class,
-		DebDropService.class,
-		CpsScript
-	]
-
 	def instances = [:]
 
 	def init(CpsScript script, Map<String, Object> config = [:]) {
