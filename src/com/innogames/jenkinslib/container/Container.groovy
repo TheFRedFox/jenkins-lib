@@ -94,4 +94,11 @@ class Container {
 		return instance
 	}
 
+	static Container newInstance(CpsScript script) {
+		def container = new Container()
+		container.init(script)
+		instance = container
+		return container
+	}
+
 }
