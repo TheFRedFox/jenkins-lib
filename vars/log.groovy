@@ -3,6 +3,7 @@ import com.innogames.jenkinslib.logger.LogLevel
 
 def call(Object message, String level) {
 	def container = Container.getInstance()
+	println container
 	def logger = container.getLogger()
 	logger.log(message, LogLevel.valueOf(level))
 }
