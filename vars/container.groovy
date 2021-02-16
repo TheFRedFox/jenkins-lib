@@ -9,3 +9,7 @@ def call(CpsScript script = null, Map<String, Object> config = [:]) {
 
 	return container
 }
+
+def something() {
+	println 'something'
+}
