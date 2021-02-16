@@ -16,7 +16,7 @@ class Container {
 
 	CpsScript scriptInstance = null
 
-	Map<String, Object> config = null
+	Config config = null
 
 	static Jenkins jenkinsInstance = Jenkins.get()
 
@@ -40,7 +40,7 @@ class Container {
 		}
 
 		this.scriptInstance = script
-		this.config = config
+		this.config = new Config(config)
 	}
 
 	def <T> T getComponent(Class<T> clazz) {
@@ -48,8 +48,8 @@ class Container {
 			return this.getScript()
 		}
 
-		if (instances.containsKey(clazz)) {
-			return instances.get(clazz)
+		if (clazz.isAssignableFrom(Config.class)) {
+			return this.config as T
 		}
 
 		def service = autowire(clazz)
