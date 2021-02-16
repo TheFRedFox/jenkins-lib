@@ -29,7 +29,7 @@ class HttpService {
 
 	@NonCPS
 	String httpGet(String url, AuthInterface auth = null, int timeout = 30) {
-		log.log("Http::httpGet for $url")
+//		log.log("Http::httpGet for $url")
 
 		HttpGet request = new HttpGet(url)
 		prepareRequest(request, auth)
@@ -43,7 +43,7 @@ class HttpService {
 			.build()
 
 		HttpResponse response = client.execute(request)
-		log.log(response.statusLine.toString())
+//		log.log(response.statusLine.toString())
 
 		throwExceptionWhenRestFailed(response.getStatusLine(), url, "GET")
 
