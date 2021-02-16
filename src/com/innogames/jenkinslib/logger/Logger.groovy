@@ -1,6 +1,7 @@
 package com.innogames.jenkinslib.logger
 
 import com.innogames.jenkinslib.container.Autowire
+import com.innogames.jenkinslib.container.Value
 import org.codehaus.groovy.runtime.DefaultGroovyMethods
 import org.jenkinsci.plugins.workflow.cps.CpsScript
 
@@ -8,9 +9,12 @@ class Logger {
 
 	CpsScript script
 
+	public LogLevel level
+
 	@Autowire
-	Logger(CpsScript script) {
+	Logger(CpsScript script, @Value('logging.level') LogLevel logLevel) {
 		this.script = script
+		this.level = logLevel
 	}
 
 	def log(Object message) {
@@ -29,6 +33,10 @@ class Logger {
 		}
 
 		script.sh "echo '${msg}' 1>&2"
+	}
+
+	def getLevel() {
+		return this.level
 	}
 
 }
