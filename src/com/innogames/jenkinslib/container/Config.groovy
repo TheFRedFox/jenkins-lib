@@ -1,6 +1,6 @@
 package com.innogames.jenkinslib.container
 
-class Config implements Map<String, Object> {
+class Config {
 
 	Map<String, Object> map
 
@@ -8,63 +8,63 @@ class Config implements Map<String, Object> {
 		this.map = map
 	}
 
-	@Override
+//	@Override
 	int size() {
 		return this.map.size()
 	}
 
-	@Override
+//	@Override
 	boolean isEmpty() {
 		return this.map.isEmpty()
 	}
 
-	@Override
+//	@Override
 	boolean containsKey(Object key) {
 		return this.map.containsKey(key)
 	}
 
-	@Override
+//	@Override
 	boolean containsValue(Object value) {
 		return this.map.containsValue(value)
 	}
 
-	@Override
+//	@Override
 	Object get(Object key) {
 		return this.map.get(key)
 	}
 
-	@Override
+//	@Override
 	Object put(String key, Object value) {
 		return this.map.put(key, value)
 	}
 
-	@Override
+//	@Override
 	Object remove(Object key) {
 		return this.map.remove(key)
 	}
 
-	@Override
+//	@Override
 	void putAll(Map<? extends String, ?> m) {
 		this.map.putAll(m)
 	}
 
-	@Override
+//	@Override
 	void clear() {
 		this.map.clear()
 	}
 
-	@Override
+//	@Override
 	Set<String> keySet() {
 		return this.map.keySet()
 	}
 
-	@Override
+//	@Override
 	Collection<Object> values() {
 		return this.map.values()
 	}
 
-	@Override
-	Set<Entry<String, Object>> entrySet() {
+//	@Override
+	Set<Map.Entry<String, Object>> entrySet() {
 		return this.map.entrySet()
 	}
 
