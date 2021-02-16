@@ -17,7 +17,11 @@ class Logger {
 		this.level = logLevel ?: LogLevel.INFO
 	}
 
-	def log(Object message) {
+	def log(Object message, LogLevel level = LogLevel.INFO) {
+		if (level < this.level) {
+			return
+		}
+
 		def msg = message
 		if (!msg instanceof String) {
 			msg = String.valueOf(msg)
@@ -26,7 +30,11 @@ class Logger {
 		script.println msg
 	}
 
-	def error(Object message) {
+	def error(Object message, LogLevel level = LogLevel.ERROR) {
+		if (level < this.level) {
+			return
+		}
+
 		def msg = message
 		if (!msg instanceof String) {
 			msg = String.valueOf(msg)
