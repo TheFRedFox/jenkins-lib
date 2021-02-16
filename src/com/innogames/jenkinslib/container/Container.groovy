@@ -8,12 +8,15 @@ import jenkins.model.Jenkins
 import org.jenkinsci.plugins.workflow.cps.CpsScript
 
 import java.lang.reflect.Constructor
+import java.lang.reflect.Parameter
 
 class Container {
 
 	static def instance = null
 
 	CpsScript scriptInstance = null
+
+	Map<String, Object> config = null
 
 	static Jenkins jenkinsInstance = Jenkins.get()
 
@@ -31,12 +34,13 @@ class Container {
 
 	def instances = [:]
 
-	def init(CpsScript script) {
+	def init(CpsScript script, Map<String, Object> config = [:]) {
 		if (script == null) {
 			throw new NullPointerException('script has to be specified')
 		}
 
-		scriptInstance = script
+		this.scriptInstance = script
+		this.config = config
 	}
 
 	def <T> T getComponent(Class<T> clazz) {
@@ -81,22 +85,53 @@ class Container {
 	}
 
 	def autowire(Constructor constructor) {
-		def parameters = constructor.getParameterTypes()
+		def parameters = constructor.getParameters()
 		def gottenParameters = []
 		for (parameter in parameters) {
-			gottenParameters.add(getComponent(parameter))
+			gottenParameters.add(autowire(parameter))
 		}
 
 		return constructor.newInstance(gottenParameters.toArray())
+	}
+
+	def autowire(Parameter parameter) {
+		if (parameter.isAnnotationPresent(Value.class)) {
+			def configName = parameter.getAnnotation(Value.class).value()
+			def value = this.config.get(configName)
+			return convert(parameter.type, value)
+		}
+
+		return getComponent(parameter.type)
+	}
+
+	def convert(Class type, Object value) {
+
+		if (type == String.class) {
+			return value as String
+		}
+
+		if (type.isEnum()) {
+			return type.invokeMethod('valueOf', value as String)
+		}
+
+		if (type == Integer.class) {
+			return Integer.valueOf(value as String)
+		}
+
+		if (type == int.class) {
+			return Integer.parseInt(value as String)
+		}
+
+
 	}
 
 	static Container getInstance() {
 		return instance
 	}
 
-	static Container newInstance(CpsScript script) {
+	static Container newInstance(CpsScript script, Map<String, Object> config) {
 		def container = new Container()
-		container.init(script)
+		container.init(script, config)
 		instance = container
 		return container
 	}
