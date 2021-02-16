@@ -96,7 +96,13 @@ class Container {
 
 	def autowire(Parameter parameter) {
 		if (parameter.isAnnotationPresent(Value.class)) {
-			def configName = parameter.getAnnotation(Value.class).value()
+			def annotation = parameter.getAnnotation(Value.class)
+			def configName = annotation.value()
+			if (!this.config.containsKey(configName)) {
+				def defaultValue = annotation.defaultValue()
+				return defaultValue
+			}
+
 			def value = this.config.get(configName)
 			return convert(parameter.type, value)
 		}
