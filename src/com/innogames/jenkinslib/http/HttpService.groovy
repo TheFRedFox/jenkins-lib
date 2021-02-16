@@ -14,6 +14,7 @@ import org.apache.http.client.methods.HttpDelete
 import org.apache.http.client.methods.HttpGet
 import org.apache.http.client.methods.HttpPost
 import org.apache.http.client.methods.HttpPut
+import org.apache.http.client.methods.HttpUriRequest
 import org.apache.http.entity.StringEntity
 import org.apache.http.impl.client.DefaultHttpRequestRetryHandler
 import org.apache.http.impl.client.HttpClientBuilder
@@ -27,9 +28,8 @@ class HttpService {
 		this.log = log
 	}
 
-	@NonCPS
 	String httpGet(String url, AuthInterface auth = null, int timeout = 30) {
-//		log.log("Http::httpGet for $url")
+		log.log("Http::httpGet for $url")
 
 		HttpGet request = new HttpGet(url)
 		prepareRequest(request, auth)
@@ -42,15 +42,14 @@ class HttpService {
 			.setRetryHandler(new DefaultHttpRequestRetryHandler(5, true))
 			.build()
 
-		HttpResponse response = client.execute(request)
-//		log.log(response.statusLine.toString())
+		HttpResponse response = this.sendRequest(request, client)
+		log.log(response.statusLine.toString())
 
 		throwExceptionWhenRestFailed(response.getStatusLine(), url, "GET")
 
 		response.entity.content.text
 	}
 
-	@NonCPS
 	String httpPut(String url, String json, AuthInterface auth = null, int timeout = 30) {
 		log.log("HttpRequest::httpPut for $url wit content $json")
 
@@ -66,14 +65,13 @@ class HttpService {
 			.setRetryHandler(new DefaultHttpRequestRetryHandler(5, true))
 			.build()
 
-		HttpResponse response = client.execute(request)
+		HttpResponse response = this.sendRequest(request, client)
 
 		throwExceptionWhenRestFailed(response.getStatusLine(), url, "PUT")
 
 		response.entity.content.text
 	}
 
-	@NonCPS
 	String httpPost(String url, String json, AuthInterface auth = null, int timeout = 30) {
 		log.log("HttpRequest::httpPost for $url with content $json")
 
@@ -89,14 +87,13 @@ class HttpService {
 			.setRetryHandler(new DefaultHttpRequestRetryHandler(5, true))
 			.build()
 
-		HttpResponse response = client.execute(request)
+		HttpResponse response = this.sendRequest(request, client)
 
 		throwExceptionWhenRestFailed(response.getStatusLine(), url, "POST")
 
 		response.entity.content.text
 	}
 
-	@NonCPS
 	String httpDelete(String url, AuthInterface auth = null, int timeout = 30) {
 		log.log("HttpRequest::httpDelete for $url")
 
@@ -111,7 +108,7 @@ class HttpService {
 			.setRetryHandler(new DefaultHttpRequestRetryHandler(5, true))
 			.build()
 
-		HttpResponse response = client.execute(request)
+		HttpResponse response = this.sendRequest(request, client)
 
 		throwExceptionWhenRestFailed(response.getStatusLine(), url, "DELETE")
 
@@ -127,7 +124,6 @@ class HttpService {
 		}
 	}
 
-	@NonCPS
 	private RequestConfig retrieveTimeoutConfig(int timeout) {
 		RequestConfig.custom()
 			.setConnectTimeout(timeout * 1000)
@@ -135,14 +131,12 @@ class HttpService {
 			.build()
 	}
 
-	@NonCPS
 	void prepareRequest(HttpMessage request, AuthInterface auth = null) {
 		if (auth) {
 			auth.prepareRequest(request)
 		}
 	}
 
-	@NonCPS
 	private void throwExceptionWhenRestFailed(StatusLine status, url, method) {
 		if (status.getStatusCode() < 200 || status.getStatusCode() >= 300) {
 			throw new HttpException("""
@@ -153,4 +147,10 @@ class HttpService {
 			""")
 		}
 	}
+
+	@NonCPS
+	private HttpResponse sendRequest(HttpUriRequest request, HttpClient client) {
+		return client.execute(request)
+	}
+
 }
