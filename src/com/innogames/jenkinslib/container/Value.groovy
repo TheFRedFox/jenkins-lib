@@ -11,6 +11,4 @@ import java.lang.annotation.Target
 
 	String value();
 
-	Object defaultValue();
-
 }
