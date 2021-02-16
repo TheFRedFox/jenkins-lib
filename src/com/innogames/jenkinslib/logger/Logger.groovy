@@ -12,14 +12,14 @@ class Logger {
 	public LogLevel level
 
 	@Autowire
-	Logger(CpsScript script, @Value('logging.level') LogLevel logLevel) {
+	Logger(CpsScript script, @Value(value = 'logging.level', defaultValue = LogLevel.INFO) LogLevel logLevel) {
 		this.script = script
 		this.level = logLevel
 	}
 
 	def log(Object message) {
 		def msg = message
-		if(!msg instanceof String) {
+		if (!msg instanceof String) {
 			msg = String.valueOf(msg)
 		}
 		DefaultGroovyMethods.println(msg)
@@ -28,7 +28,7 @@ class Logger {
 
 	def error(Object message) {
 		def msg = message
-		if(!msg instanceof String) {
+		if (!msg instanceof String) {
 			msg = String.valueOf(msg)
 		}
 
