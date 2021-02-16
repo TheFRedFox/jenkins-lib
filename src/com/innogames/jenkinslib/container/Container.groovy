@@ -99,8 +99,7 @@ class Container {
 			def annotation = parameter.getAnnotation(Value.class)
 			def configName = annotation.value()
 			if (!this.config.containsKey(configName)) {
-				def defaultValue = annotation.defaultValue()
-				return defaultValue
+				return null
 			}
 
 			def value = this.config.get(configName)
