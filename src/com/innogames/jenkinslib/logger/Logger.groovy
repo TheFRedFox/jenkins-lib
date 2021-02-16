@@ -27,7 +27,7 @@ class Logger {
 			msg = String.valueOf(msg)
 		}
 		DefaultGroovyMethods.println(msg)
-		script.println msg
+		script.println(msg)
 	}
 
 	def error(Object message, LogLevel level = LogLevel.ERROR) {
@@ -40,7 +40,7 @@ class Logger {
 			msg = String.valueOf(msg)
 		}
 
-		script.sh "echo '${msg}' 1>&2"
+		script.sh("echo '" + msg + "' 1>&2")
 	}
 
 }
