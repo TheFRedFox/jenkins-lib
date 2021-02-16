@@ -2,70 +2,70 @@ package com.innogames.jenkinslib.container
 
 class Config implements Map<String, Object> {
 
-	Map<String, Object> config
+	Map<String, Object> map
 
-	Config(Map<String, Object> config) {
-		this.config = config
+	Config(Map<String, Object> map) {
+		this.map = map
 	}
 
 	@Override
 	int size() {
-		return this.config.size()
+		return this.map.size()
 	}
 
 	@Override
 	boolean isEmpty() {
-		return this.config.isEmpty()
+		return this.map.isEmpty()
 	}
 
 	@Override
 	boolean containsKey(Object key) {
-		return this.config.containsKey(key)
+		return this.map.containsKey(key)
 	}
 
 	@Override
 	boolean containsValue(Object value) {
-		return this.config.containsValue(value)
+		return this.map.containsValue(value)
 	}
 
 	@Override
 	Object get(Object key) {
-		return this.config.get(key)
+		return this.map.get(key)
 	}
 
 	@Override
 	Object put(String key, Object value) {
-		return this.config.put(key, value)
+		return this.map.put(key, value)
 	}
 
 	@Override
 	Object remove(Object key) {
-		return this.config.remove(key)
+		return this.map.remove(key)
 	}
 
 	@Override
 	void putAll(Map<? extends String, ?> m) {
-		this.config.putAll(m)
+		this.map.putAll(m)
 	}
 
 	@Override
 	void clear() {
-		this.config.clear()
+		this.map.clear()
 	}
 
 	@Override
 	Set<String> keySet() {
-		return this.config.keySet()
+		return this.map.keySet()
 	}
 
 	@Override
 	Collection<Object> values() {
-		return this.config.values()
+		return this.map.values()
 	}
 
 	@Override
 	Set<Entry<String, Object>> entrySet() {
-		return this.config.entrySet()
+		return this.map.entrySet()
 	}
 
 }
