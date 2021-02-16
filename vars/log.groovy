@@ -7,10 +7,6 @@ def static call(Object message, String level) {
 	logger.log(message, LogLevel.valueOf(level))
 }
 
-def static trace(Object message) {
-	call(message, 'TRACE')
-}
-
 def static debug(Object message) {
 	call(message, 'DEBUG')
 }
