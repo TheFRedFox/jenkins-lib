@@ -9,7 +9,7 @@ class Logger {
 
 	CpsScript script
 
-	public LogLevel level
+	LogLevel level
 
 	@Autowire
 	Logger(CpsScript script, @Value(value = 'logging.level') LogLevel logLevel) {
@@ -33,10 +33,6 @@ class Logger {
 		}
 
 		script.sh "echo '${msg}' 1>&2"
-	}
-
-	def getLevel() {
-		return this.level
 	}
 
 }
