@@ -52,9 +52,12 @@ class Container {
 			return this.config as T
 		}
 
-		def service = autowire(clazz)
+		if (!instances.containsKey(clazz)) {
+			def service = autowire(clazz)
+			instances.put(clazz, service)
+		}
 
-		return service
+		return instances.get(clazz) as T
 	}
 
 	def getLogger() {
