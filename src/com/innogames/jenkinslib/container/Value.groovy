@@ -11,6 +11,6 @@ import java.lang.annotation.Target
 
 	String value();
 
-	def defaultValue();
+	Object defaultValue();
 
 }
