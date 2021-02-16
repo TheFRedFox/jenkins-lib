@@ -40,7 +40,7 @@ class Logger {
 			msg = String.valueOf(msg)
 		}
 
-		script.sh("echo 'hello' 1>&2")
+		script.sh('echo "hello"')
 	}
 
 }
