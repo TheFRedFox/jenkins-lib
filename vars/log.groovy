@@ -1,7 +1,7 @@
 import com.innogames.jenkinslib.container.Container
 import com.innogames.jenkinslib.logger.LogLevel
 
-def static call(Object message, LogLevel level) {
+def static call(Object message, LogLevel level = null) {
 	def container = Container.getInstance()
 	def logger = container.getLogger()
 	logger.log(message, level)
