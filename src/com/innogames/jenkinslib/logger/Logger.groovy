@@ -11,13 +11,19 @@ class Logger {
 
 	LogLevel level
 
+	LogLevel defaultLevel = LogLevel.INFO
+
 	@Autowire
 	Logger(CpsScript script, @Value(value = 'logging.level') LogLevel logLevel) {
 		this.script = script
 		this.level = logLevel ?: LogLevel.INFO
 	}
 
-	def log(Object message, LogLevel level = LogLevel.INFO) {
+	def log(Object message, LogLevel level = null) {
+		if (level == null) {
+			level = defaultLevel
+		}
+
 		if (level < this.level) {
 			return
 		}
