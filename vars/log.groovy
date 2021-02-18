@@ -1,14 +1,14 @@
 import com.innogames.jenkinslib.container.Container
 import com.innogames.jenkinslib.logger.LogLevel
 
-def static call(Object message, String level) {
-	call(message, LogLevel.valueOf(level))
-}
-
 def static call(Object message, LogLevel level) {
 	def container = Container.getInstance()
 	def logger = container.getLogger()
 	logger.log(message, level)
+}
+
+def static call(Object message, String level) {
+	call(message, LogLevel.valueOf(level))
 }
 
 def static trace(Object message) {
