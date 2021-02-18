@@ -1,28 +1,36 @@
 import com.innogames.jenkinslib.container.Container
 import com.innogames.jenkinslib.logger.LogLevel
 
-def static log(Object message, String level) {
+def static call(Object message, String level) {
+	call(message, LogLevel.valueOf(level))
+}
+
+def static call(Object message, LogLevel level) {
 	def container = Container.getInstance()
 	def logger = container.getLogger()
-	logger.log(message, LogLevel.valueOf(level))
+	logger.log(message, level)
+}
+
+def static trace(Object message) {
+	call(message, LogLevel.TRACE)
 }
 
 def static debug(Object message) {
-	log(message, 'DEBUG')
+	call(message, LogLevel.DEBUG)
 }
 
 def static info(Object message) {
-	log(message, 'INFO')
+	call(message, LogLevel.INFO)
 }
 
 def static warn(Object message) {
-	log(message, 'WARN')
+	call(message, LogLevel.WARN)
 }
 
 def static error(Object message) {
-	log(message, 'ERROR')
+	call(message, LogLevel.ERROR)
 }
 
 def static critical(Object message) {
-	log(message, 'CRITICAL')
+	call(message, LogLevel.CRITICAL)
 }
