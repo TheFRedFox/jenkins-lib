@@ -18,7 +18,9 @@ import org.apache.http.entity.StringEntity
 import org.apache.http.impl.client.DefaultHttpRequestRetryHandler
 import org.apache.http.impl.client.HttpClientBuilder
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Component
 
+@Component
 class HttpService {
 
 	Logger log

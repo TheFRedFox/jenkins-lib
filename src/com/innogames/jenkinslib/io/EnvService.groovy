@@ -4,7 +4,9 @@ package com.innogames.jenkinslib.io
 import org.jenkinsci.plugins.workflow.cps.CpsScript
 import org.jenkinsci.plugins.workflow.cps.EnvActionImpl
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Component
 
+@Component
 class EnvService {
 
 	CpsScript script

@@ -5,7 +5,9 @@ import com.innogames.jenkinslib.io.ShellService
 import com.innogames.jenkinslib.logger.Logger
 import hudson.FilePath
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Component
 
+@Component
 class DebDropService {
 
 	Logger log

@@ -5,7 +5,9 @@ import com.innogames.jenkinslib.container.Value
 import org.codehaus.groovy.runtime.DefaultGroovyMethods
 import org.jenkinsci.plugins.workflow.cps.CpsScript
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Component
 
+@Component
 class Logger {
 
 	CpsScript script

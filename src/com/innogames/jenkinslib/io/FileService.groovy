@@ -5,7 +5,9 @@ import hudson.FilePath
 import jenkins.model.Jenkins
 import org.jenkinsci.plugins.workflow.cps.CpsScript
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Component
 
+@Component
 class FileService {
 
 	CpsScript script
