@@ -1,13 +1,14 @@
 package com.innogames.jenkinslib.io
 
-import com.innogames.jenkinslib.container.Autowire
+
 import org.jenkinsci.plugins.workflow.cps.CpsScript
+import org.springframework.beans.factory.annotation.Autowired
 
 class ShellService {
 
 	CpsScript script
 
-	@Autowire
+	@Autowired
 	ShellService(CpsScript script) {
 		this.script = script
 	}

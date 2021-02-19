@@ -1,9 +1,10 @@
 package com.innogames.jenkinslib.io
 
-import com.innogames.jenkinslib.container.Autowire
+
 import hudson.FilePath
 import jenkins.model.Jenkins
 import org.jenkinsci.plugins.workflow.cps.CpsScript
+import org.springframework.beans.factory.annotation.Autowired
 
 class FileService {
 
@@ -11,7 +12,7 @@ class FileService {
 
 	EnvService envService
 
-	@Autowire
+	@Autowired
 	FileService(CpsScript script, EnvService envService) {
 		this.script = script
 		this.envService = envService

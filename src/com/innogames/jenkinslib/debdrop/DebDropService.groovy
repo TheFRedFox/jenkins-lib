@@ -1,9 +1,10 @@
 package com.innogames.jenkinslib.debdrop
 
-import com.innogames.jenkinslib.container.Autowire
+
 import com.innogames.jenkinslib.io.ShellService
 import com.innogames.jenkinslib.logger.Logger
 import hudson.FilePath
+import org.springframework.beans.factory.annotation.Autowired
 
 class DebDropService {
 
@@ -11,7 +12,7 @@ class DebDropService {
 
 	ShellService shell
 
-	@Autowire
+	@Autowired
 	DebDropService(Logger log, ShellService shell) {
 		this.log = log
 		this.shell = shell

@@ -1,8 +1,9 @@
 package com.innogames.jenkinslib.io
 
-import com.innogames.jenkinslib.container.Autowire
+
 import org.jenkinsci.plugins.workflow.cps.CpsScript
 import org.jenkinsci.plugins.workflow.cps.EnvActionImpl
+import org.springframework.beans.factory.annotation.Autowired
 
 class EnvService {
 
@@ -10,7 +11,7 @@ class EnvService {
 
 	EnvActionImpl env
 
-	@Autowire
+	@Autowired
 	EnvService(CpsScript script) {
 		this.script = script
 		this.env = script.env

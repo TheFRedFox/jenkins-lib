@@ -1,9 +1,10 @@
 package com.innogames.jenkinslib.logger
 
-import com.innogames.jenkinslib.container.Autowire
+
 import com.innogames.jenkinslib.container.Value
 import org.codehaus.groovy.runtime.DefaultGroovyMethods
 import org.jenkinsci.plugins.workflow.cps.CpsScript
+import org.springframework.beans.factory.annotation.Autowired
 
 class Logger {
 
@@ -13,7 +14,7 @@ class Logger {
 
 	LogLevel defaultLevel = LogLevel.INFO
 
-	@Autowire
+	@Autowired
 	Logger(CpsScript script, @Value(value = 'logging.level') LogLevel logLevel) {
 		this.script = script
 		this.level = logLevel ?: LogLevel.INFO

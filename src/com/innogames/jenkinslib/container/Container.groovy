@@ -6,6 +6,7 @@ import com.innogames.jenkinslib.io.EnvService
 import com.innogames.jenkinslib.logger.Logger
 import jenkins.model.Jenkins
 import org.jenkinsci.plugins.workflow.cps.CpsScript
+import org.springframework.beans.factory.annotation.Autowired
 
 import java.lang.reflect.Constructor
 import java.lang.reflect.Parameter
@@ -67,7 +68,7 @@ class Container {
 	def autowire(Class clazz) {
 		def constructors = clazz.getConstructors()
 		for (def constructor in constructors) {
-			if (constructor.isAnnotationPresent(Autowire.class)) {
+			if (constructor.isAnnotationPresent(Autowired.class)) {
 				return autowire(constructor)
 			}
 		}

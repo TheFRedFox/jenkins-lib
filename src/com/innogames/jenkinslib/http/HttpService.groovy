@@ -1,7 +1,6 @@
 package com.innogames.jenkinslib.http
 
 import com.cloudbees.groovy.cps.NonCPS
-import com.innogames.jenkinslib.container.Autowire
 import com.innogames.jenkinslib.http.auth.AuthInterface
 import com.innogames.jenkinslib.logger.Logger
 import org.apache.http.HttpException
@@ -18,12 +17,13 @@ import org.apache.http.client.methods.HttpUriRequest
 import org.apache.http.entity.StringEntity
 import org.apache.http.impl.client.DefaultHttpRequestRetryHandler
 import org.apache.http.impl.client.HttpClientBuilder
+import org.springframework.beans.factory.annotation.Autowired
 
 class HttpService {
 
 	Logger log
 
-	@Autowire
+	@Autowired
 	HttpService(Logger log) {
 		this.log = log
 	}
