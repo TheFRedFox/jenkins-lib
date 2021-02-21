@@ -9,11 +9,7 @@ import org.apache.http.HttpResponse
 import org.apache.http.StatusLine
 import org.apache.http.client.HttpClient
 import org.apache.http.client.config.RequestConfig
-import org.apache.http.client.methods.HttpDelete
-import org.apache.http.client.methods.HttpGet
-import org.apache.http.client.methods.HttpPost
-import org.apache.http.client.methods.HttpPut
-import org.apache.http.client.methods.HttpUriRequest
+import org.apache.http.client.methods.*
 import org.apache.http.entity.StringEntity
 import org.apache.http.impl.client.DefaultHttpRequestRetryHandler
 import org.apache.http.impl.client.HttpClientBuilder
@@ -133,20 +129,21 @@ class HttpService {
 			.build()
 	}
 
-	void prepareRequest(HttpMessage request, AuthInterface auth = null) {
+	void prepareRequest(HttpUriRequest request, AuthInterface auth = null) {
 		if (auth) {
 			auth.prepareRequest(request)
 		}
 	}
 
-	private void throwExceptionWhenRestFailed(StatusLine status, url, method) {
+	private void throwExceptionWhenRestFailed(StatusLine status, HttpUriRequest request) {
+		def url = request.getURI()
+		def method = request.getMethod()
 		if (status.getStatusCode() < 200 || status.getStatusCode() >= 300) {
-			throw new HttpException("""
-				[HttpRequest Exception] Rest call failed (code ${status.getStatusCode()}) for ${url} for method ${
-				method
-			}.\n
-				Message: ${status.getReasonPhrase()}
-			""")
+			throw new HttpException(
+				"[HttpRequest Exception] Rest call failed " +
+					"(code ${status.getStatusCode()}) for ${url} for method ${method}.\n" +
+					"Message: ${status.getReasonPhrase()}"
+			)
 		}
 	}
 
