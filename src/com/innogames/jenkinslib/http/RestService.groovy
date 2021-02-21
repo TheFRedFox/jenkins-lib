@@ -1,10 +1,11 @@
 package com.innogames.jenkinslib.http
 
 import com.cloudbees.groovy.cps.NonCPS
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.innogames.jenkinslib.http.auth.AuthInterface
 import com.innogames.jenkinslib.logger.Logger
+import groovy.json.JsonSlurper
 import org.apache.http.HttpException
-import org.apache.http.HttpMessage
 import org.apache.http.HttpResponse
 import org.apache.http.StatusLine
 import org.apache.http.client.HttpClient
@@ -17,17 +18,17 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 @Component
-class HttpService {
+class RestService {
 
 	Logger log
 
 	@Autowired
-	HttpService(Logger log) {
+	RestService(Logger log) {
 		this.log = log
 	}
 
-	String httpGet(String url, AuthInterface auth = null, int timeout = 30) {
-		log.log("Http::httpGet for $url")
+	String get(String url, AuthInterface auth = null, int timeout = 30) {
+		log.debug("Http::httpGet for $url")
 
 		HttpGet request = new HttpGet(url)
 		prepareRequest(request, auth)
@@ -41,15 +42,17 @@ class HttpService {
 			.build()
 
 		HttpResponse response = this.sendRequest(request, client)
-		log.log(response.statusLine.toString())
+		log.debug(response.statusLine.toString())
 
-		throwExceptionWhenRestFailed(response.getStatusLine(), url, "GET")
+		throwExceptionWhenRestFailed(response.getStatusLine(), request)
 
-		response.entity.content.text
+		def result = response.entity.content.text
+		return new JsonSlurper().parseText(result)
 	}
 
-	String httpPut(String url, String json, AuthInterface auth = null, int timeout = 30) {
-		log.log("HttpRequest::httpPut for $url wit content $json")
+	String put(String url, Map<String, Object> payload, AuthInterface auth = null, int timeout = 30) {
+		def json = new ObjectMapper().writeValueAsString(payload)
+		log.debug("HttpRequest::httpPut for $url with content $json")
 
 		HttpPut request = new HttpPut(url)
 		prepareRequest(request, auth)
@@ -65,17 +68,20 @@ class HttpService {
 
 		HttpResponse response = this.sendRequest(request, client)
 
-		throwExceptionWhenRestFailed(response.getStatusLine(), url, "PUT")
+		throwExceptionWhenRestFailed(response.getStatusLine(), request)
 
-		response.entity.content.text
+		def result = response.entity.content.text
+		return new JsonSlurper().parseText(result)
 	}
 
-	String httpPost(String url, String json, AuthInterface auth = null, int timeout = 30) {
-		log.log("HttpRequest::httpPost for $url with content $json")
+	String post(String url, Map<String, Object> payload, AuthInterface auth = null, int timeout = 30) {
+		def json = new ObjectMapper().writeValueAsString(payload)
+		log.debug("HttpRequest::httpPost for $url with content $json")
 
 		HttpPost request = new HttpPost(url)
-		prepareRequest(request, auth)
 		request.setEntity(new StringEntity(json, "UTF-8"))
+
+		prepareRequest(request, auth)
 
 		RequestConfig config = retrieveTimeoutConfig(timeout)
 
@@ -87,12 +93,13 @@ class HttpService {
 
 		HttpResponse response = this.sendRequest(request, client)
 
-		throwExceptionWhenRestFailed(response.getStatusLine(), url, "POST")
+		throwExceptionWhenRestFailed(response.getStatusLine(), request)
 
-		response.entity.content.text
+		def result = response.entity.content.text
+		return new JsonSlurper().parseText(result)
 	}
 
-	String httpDelete(String url, AuthInterface auth = null, int timeout = 30) {
+	String delete(String url, AuthInterface auth = null, int timeout = 30) {
 		log.log("HttpRequest::httpDelete for $url")
 
 		HttpDelete request = new HttpDelete(url)
@@ -108,9 +115,10 @@ class HttpService {
 
 		HttpResponse response = this.sendRequest(request, client)
 
-		throwExceptionWhenRestFailed(response.getStatusLine(), url, "DELETE")
+		throwExceptionWhenRestFailed(response.getStatusLine(), request)
 
-		response.entity.content.text
+		def result = response.entity.content.text
+		return new JsonSlurper().parseText(result)
 	}
 
 	String request(String method, String url) {
