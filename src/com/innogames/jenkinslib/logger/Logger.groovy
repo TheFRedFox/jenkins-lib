@@ -39,11 +39,40 @@ class Logger {
 		script.println(msg)
 	}
 
-	def error(Object message, LogLevel level = LogLevel.ERROR) {
-		if (level < this.level) {
-			return
+	def trace(Object message) {
+		log(message, LogLevel.TRACE)
+	}
+
+	def debug(Object message) {
+		log(message, LogLevel.DEBUG)
+	}
+
+	def info(Object message) {
+		log(message, LogLevel.INFO)
+	}
+
+	def warn(Object message) {
+		log(message, LogLevel.WARN)
+	}
+
+	def error(Object message) {
+		log(message, LogLevel.ERROR)
+	}
+
+	def critical(Object message) {
+		log(message, LogLevel.CRITICAL)
+	}
+
+	def stdOut(Object message) {
+		def msg = message
+		if (!msg instanceof String) {
+			msg = String.valueOf(msg)
 		}
 
+		script.echo(msg)
+	}
+
+	def stdErr(Object message) {
 		def msg = message
 		if (!msg instanceof String) {
 			msg = String.valueOf(msg)
