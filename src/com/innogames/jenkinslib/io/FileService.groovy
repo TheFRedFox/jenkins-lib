@@ -38,4 +38,8 @@ class FileService {
 		}
 	}
 
+	def write(FilePath file, String content) {
+		file.write(content, null)
+	}
+
 }
