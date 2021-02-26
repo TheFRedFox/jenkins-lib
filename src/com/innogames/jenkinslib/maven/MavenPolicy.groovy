@@ -9,9 +9,8 @@ import javax.xml.bind.annotation.XmlAccessType
 import javax.xml.bind.annotation.XmlAccessorType
 import javax.xml.bind.annotation.XmlRootElement
 
-//@XmlAccessorType(XmlAccessType.FIELD)
-//@XmlRootElement(name = 'policy')
-@EqualsAndHashCode
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = 'policy')
 class MavenPolicy {
 
 	Boolean enabled
@@ -41,6 +40,21 @@ class MavenPolicy {
 		}
 
 		return writer.toString()
+	}
+
+	boolean equals(Object other) {
+		if (other == null) return false
+		if (this.is(other)) return true
+		if (!(other instanceof MavenPolicy)) return false
+		if (!other.canEqual(this)) return false
+		if (enabled != other.enabled) return false
+		if (updatePolicy != other.updatePolicy) return false
+		if (checksumPolicy != other.checksumPolicy) return false
+		return true
+	}
+
+	boolean canEqual(Object other) {
+		return other instanceof MavenPolicy
 	}
 
 }

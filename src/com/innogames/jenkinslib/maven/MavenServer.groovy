@@ -11,7 +11,6 @@ import javax.xml.bind.annotation.XmlRootElement
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = 'server')
-@EqualsAndHashCode
 class MavenServer {
 
 	String id

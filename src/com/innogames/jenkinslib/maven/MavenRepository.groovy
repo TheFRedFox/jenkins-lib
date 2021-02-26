@@ -11,7 +11,6 @@ import javax.xml.bind.annotation.XmlRootElement
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = 'repository')
-@EqualsAndHashCode
 class MavenRepository {
 
 	String id
@@ -73,6 +72,24 @@ class MavenRepository {
 		}
 
 		return writer.toString()
+	}
+
+	boolean equals(Object other) {
+		if (other == null) return false
+		if (this.is(other)) return true
+		if (!(other instanceof MavenRepository)) return false
+		if (!other.canEqual(this)) return false
+		if (id != other.id) return false
+		if (name != other.name) return false
+		if (url != other.url) return false
+		if (layout != other.layout) return false
+		if (releases != other.releases) return false
+		if (snapshots != other.snapshots) return false
+		return true
+	}
+
+	boolean canEqual(Object other) {
+		return other instanceof MavenRepository
 	}
 
 }

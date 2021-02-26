@@ -9,7 +9,6 @@ import javax.xml.bind.annotation.XmlRootElement
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = 'mirror')
-@EqualsAndHashCode
 class MavenMirror {
 
 	String id

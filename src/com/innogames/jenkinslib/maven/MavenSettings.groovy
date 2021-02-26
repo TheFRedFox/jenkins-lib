@@ -9,7 +9,6 @@ import javax.xml.bind.annotation.*
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = 'settings')
-@EqualsAndHashCode
 class MavenSettings {
 
 	@XmlAttribute(name = 'xmlns')

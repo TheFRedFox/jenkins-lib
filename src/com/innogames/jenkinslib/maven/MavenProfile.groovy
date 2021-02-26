@@ -10,7 +10,6 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = 'profile')
-@EqualsAndHashCode
 class MavenProfile {
 
 	String id
