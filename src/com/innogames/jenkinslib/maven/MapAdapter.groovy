@@ -13,6 +13,9 @@ public class MapAdapter extends XmlAdapter<MapAdapter.MapWrapper, Map<String, Ob
 
 	@Override
 	public MapWrapper marshal(Map<String, Object> m) throws Exception {
+		if (m == null) {
+			return null
+		}
 		MapWrapper wrapper = new MapWrapper();
 		List<Object> elements = new ArrayList<>();
 		for (Map.Entry<String, Object> property : m.entrySet()) {
