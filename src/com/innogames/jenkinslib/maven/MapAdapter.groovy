@@ -1,14 +1,13 @@
-package com.innogames.jenkinslib.maven;
+package com.innogames.jenkinslib.maven
 
-import javax.naming.OperationNotSupportedException;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlAnyElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.adapters.XmlAdapter;
-import javax.xml.namespace.QName;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import javax.naming.OperationNotSupportedException
+import javax.xml.bind.JAXBElement
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlAnyElement
+import javax.xml.bind.annotation.XmlRootElement
+import javax.xml.bind.annotation.adapters.XmlAdapter
+import javax.xml.namespace.QName
 
 public class MapAdapter extends XmlAdapter<MapAdapter.MapWrapper, Map<String, Object>> {
 
@@ -46,6 +45,7 @@ public class MapAdapter extends XmlAdapter<MapAdapter.MapWrapper, Map<String, Ob
 	}
 
 	@XmlRootElement
+	@XmlAccessorType(XmlAccessType.FIELD)
 	public static class MapWrapper {
 		@XmlAnyElement
 		List<Object> elements;
