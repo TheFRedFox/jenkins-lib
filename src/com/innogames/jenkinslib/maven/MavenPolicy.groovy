@@ -7,23 +7,19 @@ import javax.xml.bind.JAXBContext
 import javax.xml.bind.Marshaller
 import javax.xml.bind.annotation.XmlAccessType
 import javax.xml.bind.annotation.XmlAccessorType
-import javax.xml.bind.annotation.XmlElement
 import javax.xml.bind.annotation.XmlRootElement
 
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name = 'policy')
+//@XmlAccessorType(XmlAccessType.FIELD)
+//@XmlRootElement(name = 'policy')
 @EqualsAndHashCode
 class MavenPolicy {
 
-	@XmlElement
 	Boolean enabled
 
 	// updatePolicy always, daily, interval:X, never
-	@XmlElement
 	String updatePolicy
 
 	// checksumPolicy always, daily, interval:X, never
-	@XmlElement
 	String checksumPolicy
 
 	def toXML() {
