@@ -16,7 +16,7 @@ class MavenProfile {
 
 	def activation
 
-	@XmlJavaTypeAdapter(MapAdapter)
+	@XmlJavaTypeAdapter(MapAdapter.class)
 	Map<String, String> properties
 
 	@XmlElementWrapper(name = 'repositories')
