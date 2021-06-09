@@ -8,7 +8,7 @@ def call(Object message, LogLevel level) {
 }
 
 def call(Object message) {
-	call(message, (LogLevel) null)
+	call(message, (LogLevel) null as LogLevel)
 }
 
 def call(Object message, String level) {
@@ -16,7 +16,7 @@ def call(Object message, String level) {
 	if (level != null) {
 		logLevel = LogLevel.valueOf(level)
 	}
-	call(message, (LogLevel) logLevel)
+	call(message, (LogLevel) logLevel as LogLevel)
 }
 
 def trace(Object message) {
