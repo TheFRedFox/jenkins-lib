@@ -2,7 +2,7 @@ import com.innogames.jenkinslib.container.Container
 import com.innogames.jenkinslib.logger.LogLevel
 
 def call(Object message, LogLevel level = null) {
-	log(message, level)
+	this.log(message, level)
 }
 
 def call(Object message, String level) {
@@ -10,7 +10,7 @@ def call(Object message, String level) {
 	if (level != null) {
 		logLevel = LogLevel.valueOf(level)
 	}
-	log(message, logLevel)
+	this.log(message, logLevel)
 }
 
 private def log(Object message, LogLevel level = null) {
