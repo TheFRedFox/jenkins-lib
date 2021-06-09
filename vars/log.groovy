@@ -1,18 +1,18 @@
 import com.innogames.jenkinslib.container.Container
 import com.innogames.jenkinslib.logger.LogLevel
 
-def call(Object message, LogLevel level = null) {
-	def container = Container.getInstance()
-	def logger = container.getLogger()
-	logger.log(message, level)
-}
-
 def call(Object message, String level) {
 	LogLevel logLevel = null
 	if (level != null) {
 		logLevel = LogLevel.valueOf(level)
 	}
 	call(message, (LogLevel) logLevel as LogLevel)
+}
+
+def call(Object message, LogLevel level = null) {
+	def container = Container.getInstance()
+	def logger = container.getLogger()
+	logger.log(message, level)
 }
 
 def trace(Object message) {
